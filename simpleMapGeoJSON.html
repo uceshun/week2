@@ -20,17 +20,17 @@
 <!-- the following script will load the map and set the default view and zoom, as well as loading the
 basemap tiles -->
 <script>
+// new icon -
+ var testMarkerPink = L.AwesomeMarkers.icon({
+ icon: 'play',
+ markerColor: 'pink'
+ });
  L.geoJSON(geojsonFeature, {
  pointToLayer: function (feature, latlng) {
  return L.marker(latlng, {icon:testMarkerPink});
  }
  }).addTo(mymap).bindPopup("<b>"+geojsonFeature.properties.name+"
 "+geojsonFeature.properties.popupContent+"<b>");
-// new icon -
- var testMarkerPink = L.AwesomeMarkers.icon({
- icon: 'play',
- markerColor: 'pink'
- });
 // create a geoJSON feature -
 var geojsonFeature = {
  "type": "Feature",

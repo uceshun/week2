@@ -7,7 +7,39 @@
 
 <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js"
    integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA=="
-   crossorigin=""></script>
+   crossorigin="">
+
+var client;
+
+var earthquakelayer;
+   function getEarthquakes() {
+    client = new XMLHttpRequest();
+
+   client.open('GET','https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson');
+    client.onreadystatechange = earthquakeResponse; // note don't use earthquakeResponse() with
+   brackets as that doesn't work
+    client.send();
+}
+
+   function earthquakeResponse() {
+
+    if (client.readyState == 4) {
+ 
+     var earthquakedata = client.responseText;
+     loadEarthquakelayer(earthquakedata);
+     }
+}
+   function loadEarthquakelayer(earthquakedata) {
+    var earthquakejson = JSON.parse(earthquakedata);
+    earthquakelayer = L.geoJson(earthquakejson).addTo(mymap);
+    mymap.fitBounds(earthquakelayer.getBounds());
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+ getEarthquakes();
+}, false);
+
+</script>
 
  <!-- the following CSS is used to set the size of the Map -->
  <style type="text/css">

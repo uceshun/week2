@@ -74,7 +74,10 @@ document.addEventListener('DOMContentLoaded', function() {
  </style>
 </head>
 <body>
-
+<!-- the mapid div will hold the map -->
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<!-- the following script will load the map and set the default view and zoom, as well as loading thebasemap tiles -->
+<script>
 var testMarkerRed = L.AwesomeMarkers.icon({
  icon: 'play',
  markerColor: 'red'
@@ -82,12 +85,7 @@ var testMarkerRed = L.AwesomeMarkers.icon({
  var testMarkerPink = L.AwesomeMarkers.icon({
  icon: 'play',
  markerColor: 'pink'
- });
- 
-<!-- the mapid div will hold the map -->
-<div id="mapid" style="width: 600px; height: 400px;"></div>
-<!-- the following script will load the map and set the default view and zoom, as well as loading thebasemap tiles -->
-<script>
+ }); 
 // load the map
 var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 // load the tiles

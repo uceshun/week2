@@ -32,7 +32,7 @@ var geojsonFeature = {
  },
  "geometry": {
  "type": "Point",
- "coordinates": [-0.118092, 51.509865]
+ "coordinates": [-0.134040, 51.524559]
  }
 };
 // and add it to the map
@@ -44,6 +44,18 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 		id: 'mapbox.streets'
 	}).addTo(mymap);
+	// create a custom popup
+var popup = L.popup();
+// create an event detector to wait for the user's click event and then use the popup to show themwhere they clicked
+// note that you don't need to do any complicated maths to convert screen coordinates to real worldcoordiantes - the Leaflet API does this for you
+function onMapClick(e) {
+popup
+.setLatLng(e.latlng)
+.setContent("You clicked the map at " + e.latlng.toString())
+.openOn(mymap);
+}
+// now add the click event detector to the map
+mymap.on('click', onMapClick);
 </script>
 </body>
 </html>
